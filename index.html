@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>react로 버튼 click 이벤트-시/분 변환</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    body {
+      background: #f8f8f8;
+      margin: 0;
+      color: #313131;
+      font-family: "Poppins", sans-serif;
+    }
+    #root > div {
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+    }
+    h3 {
+      font-size: 26px;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      background: #57dafb;
+      width: 100%;
+    }
+    select {
+      background: none;
+      border: 2px solid #333;
+      padding: 15px 20px;
+      font-size: 22px;
+      margin: 40px auto 0;
+      width: 80%;
+    }
+    #root > div > div {
+      width: 80%;
+    }
+    #root > div > div > div:not(last-child) {
+      margin-bottom: 10px;
+    }
+    label {
+      font-size: 20px;
+      width: 80px;
+      display: inline-block;
+      font-weight: 600;
+    }
+    input {
+      padding: 10px;
+      border-radius: 0;
+      margin: 0 5px 0 15px;
+    }
+    input:disabled {
+      background: #ddd;
+    }
+    input::placeholder {
+      font-size: 14px;
+      color: #999;
+    }
+    .btn {
+      text-align: center;
+    }
+    button {
+      border-radius: 0;
+      font-size: 18px;
+      padding: 10px 30px;
+      background: none;
+      margin: 0 5px;
+    }
+    button:first-child {
+      background: #313131;
+      color: #fff;
+      border-color: #313131;
+    }
+  </style>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script type="text/babel">
+    const root = document.querySelector("#root");
+    function MinutesToHours() {
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => setAmount(0);
+      const onInvert = () => {
+        reset();
+        setInverted((current) => !current);
+      };
+      return (
+        <div>
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={inverted ? amount * 60 : amount}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange}
+              disabled={inverted}
+            />
+            <span>minutes</span>
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={inverted ? amount : Math.round(amount / 60)}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              disabled={!inverted}
+              onChange={onChange}
+            />
+            <span>hours</span>
+          </div>
+          <div class="btn">
+            <button onClick={reset}>Reset</button>
+            <button onClick={onInvert}>
+              {inverted ? "Turn back" : "Invert"}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    function KmToMiles() {
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const onInvert = () => {
+        reset();
+        setInverted((current) => !current);
+      };
+      const reset = () => setAmount(0);
+      return (
+        <div>
+          <div>
+            <label htmlFor="km">Km</label>
+            <input
+              value={inverted ? amount * 1.16 : amount}
+              id="km"
+              placeholder="Km"
+              type="number"
+              onChange={onChange}
+              disabled={inverted}
+            />
+            <span>km</span>
+          </div>
+          <div>
+            <label htmlFor="miles">Miles</label>
+            <input
+              value={inverted ? amount : Math.round(amount / 1.16)}
+              id="miles"
+              placeholder="Miles"
+              type="number"
+              onChange={onChange}
+              disabled={!inverted}
+            />
+            <span>miles</span>
+          </div>
+          <div class="btn">
+            <button onClick={reset}>Reset</button>
+            <button onClick={onInvert}>
+              {inverted ? "Turn back" : "Invert"}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    function CmToInch() {
+      const [amount, setAmount] = React.useState();
+      const [inverted, setInverted] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const onInvert = () => {
+        reset();
+        setInverted((current) => !current);
+      };
+      const reset = () => setAmount(0);
+      return (
+        <div>
+          <div>
+            <label htmlFor="km">Cm</label>
+            <input
+              value={inverted ? amount * 2.54 : amount}
+              id="cm"
+              placeholder="Cm"
+              type="number"
+              onChange={onChange}
+              disabled={inverted}
+            />
+            <span>cm</span>
+          </div>
+          <div>
+            <label htmlFor="miles">Inch</label>
+            <input
+              value={inverted ? amount : Math.round(amount / 2.54)}
+              id="inch"
+              placeholder="Inch"
+              type="number"
+              onChange={onChange}
+              disabled={!inverted}
+            />
+            <span>inch</span>
+          </div>
+          <div class="btn">
+            <button onClick={reset}>Reset</button>
+            <button onClick={onInvert}>
+              {inverted ? "Turn back" : "Invert"}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState("xx");
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <h3>Super Converter</h3>
+          <select value={index} onChange={onSelect}>
+            <option value="xx">Please select your unit</option>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Km & Miles</option>
+            <option value="2">Cm & Inch</option>
+          </select>
+          <br />
+          {index === "xx" ? "Please select your unit " : null}
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+          {index === "2" ? <CmToInch /> : null}
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
